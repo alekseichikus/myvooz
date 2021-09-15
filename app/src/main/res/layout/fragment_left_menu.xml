@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigationViewContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_notification_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_bell"
+            app:tint="@color/textLink" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvCloseButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/backgroundFill"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_close"
+            app:tint="@color/textTertiary" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_photo_container"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/backgroundFill"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvCloseButton">
+
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center"
+            android:alpha="0.8"
+            android:src="@drawable/happy" />
+
+        <ImageView
+            android:id="@+id/iv_photo_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_photo"
+            android:visibility="gone" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_photo_container"
+        app:layout_constraintLeft_toRightOf="@+id/cv_photo_container"
+        app:layout_constraintTop_toTopOf="@+id/cv_photo_container">
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Мокшанцев А."
+            android:textAppearance="@style/TextAppearance.Title" />
+
+        <TextView
+            android:id="@+id/tv_group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ИБ-144"
+            android:textAppearance="@style/TextAppearance.Body2" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cvCreateGOUButton"
+        style="@style/Button.Base.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Создать группу"
+        app:layout_constraintTop_toBottomOf="@+id/cv_photo_container" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cvInviteGOUButton"
+        style="@style/Button.Base.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Присоединиться к группе"
+        android:textColor="@color/textPrimary"
+        app:backgroundTint="@color/backgroundGreenButton"
+        app:layout_constraintTop_toBottomOf="@+id/cvCreateGOUButton" />
+
+    <include
+        android:id="@+id/cvGOUButton"
+        layout="@layout/layout_group_of_user"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/cvInviteGOUButton" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/cvGOUButton">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/llProfileSettingButton"
+            style="@style/Button.Base.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Профиль"
+            app:icon="@drawable/ic_user" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/llSelectGroup"
+            style="@style/Button.Base.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выбрать группу"
+            app:icon="@drawable/ic_users" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/llSearchEmptyAuditoryButton"
+            style="@style/Button.Base.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Свободные аудитории"
+            app:icon="@drawable/ic_search_r" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/llVkSocialButton"
+            style="@style/Button.Base.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Мы в вконтакте"
+            app:icon="@drawable/ic_vk" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/llAboutButton"
+            style="@style/Button.Base.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="О приложении"
+            app:icon="@drawable/ic_info_circle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/llAutorizationButton"
+            style="@style/Button.Base.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Войти"
+            app:icon="@drawable/ic_sign_in" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/llLogoutButton"
+            style="@style/Button.Base.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выйти"
+            android:visibility="gone"
+            app:icon="@drawable/ic_sign_out"
+            app:iconTint="@color/textBrandYa" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

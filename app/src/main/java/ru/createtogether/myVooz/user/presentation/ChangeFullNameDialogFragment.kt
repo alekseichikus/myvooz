@@ -1,0 +1,103 @@
+package ru.createtogether.myVooz.user.presentation
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import com.example.myvoozkotlin.data.db.realmModels.AuthUserModel
+import com.example.myvoozkotlin.helpers.Status
+import com.example.myvoozkotlin.helpers.UtilsUI
+import ru.createtogether.myVooz.user.presentation.viewModel.UserViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import ru.createtogether.myVooz.MainActivity
+import ru.createtogether.myVooz.R
+import ru.createtogether.myVooz.databinding.DialogFragmentChangeUserFullnameBinding
+
+@AndroidEntryPoint
+class ChangeFullNameDialogFragment: BottomSheetDialogFragment() {
+    private var _binding: DialogFragmentChangeUserFullnameBinding? = null
+    private val binding get() = _binding!!
+    private val userViewModel: UserViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.BottomSheetDialogStyle)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = DialogFragmentChangeUserFullnameBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        configureViews()
+        initObservers()
+        setListeners()
+    }
+
+    private fun configureViews() {
+        setFullName()
+    }
+
+    private fun setFullName(){
+        binding.apply {
+            getCurrentUser()?.let {
+                etFirstName.setText(it.firstName)
+                etSecondName.setText(it.lastName)
+            }
+        }
+    }
+
+    private fun getCurrentUser(): AuthUserModel?{
+        return userViewModel.getCurrentAuthUser()
+    }
+
+    private fun initObservers() {
+        observeOnChangeFullNameResponse()
+    }
+
+    private fun observeOnChangeFullNameResponse() {
+        userViewModel.changeFullNameResponse.observe(viewLifecycleOwner, {
+            when (it.status) {
+                Status.LOADING -> {
+                    (requireActivity() as MainActivity).showWait(true)
+                }
+                Status.SUCCESS -> {
+                    (requireActivity() as MainActivity).showWait(false)
+                    if (it.data != null) {
+                        dismiss()
+                    }
+                }
+                Status.ERROR -> {
+                    if(it.error != null)
+                        UtilsUI.makeToast(it.error)
+                    (requireActivity() as MainActivity).showWait(false)
+                }
+            }
+        })
+    }
+
+    private fun setListeners() {
+        binding.cvSaveButton.setOnClickListener {
+            when {
+                binding.etFirstName.text.length !in 1..32 ->
+                    UtilsUI.makeToast(getString(R.string.toast_user_name))
+                binding.etSecondName.text.length !in 1..32 ->
+                    UtilsUI.makeToast(getString(R.string.toast_user_second_name))
+                else ->{
+                    getCurrentUser()?.let {
+                        userViewModel.changeFullName(it.accessToken, it.id, binding.etFirstName.text.toString(), binding.etSecondName.text.toString())
+                    }
+                }
+            }
+        }
+    }
+}

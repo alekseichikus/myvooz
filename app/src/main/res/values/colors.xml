@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--TEXT-->
+    <color name="textPrimary">#1f1f1f</color>
+    <color name="textSecondary">#5f5f5f</color>
+    <color name="textTertiary">#9f9f9f</color>
+    <color name="textLink">#438bf7</color>
+    <color name="textBrandYa">#ff4e33</color>
+    <color name="textDestructive">#E64646</color>
+
+    <!--BKG-->
+    <color name="backgroundFill">#F4F4F4</color>
+    <color name="backgroundContent">#fff</color>
+    <color name="backgroundPurple">#FFA25AFF</color>
+    <color name="backgroundDefaultButton">#1267ee</color>
+    <color name="button_primary_ripple">#26000000</color>
+    <color name="backgroundGreenButton">#c6df90</color>
+    <color name="backgroundDefaultLightButton">#dfe5fa</color>
+    <color name="backgroundLink">#FFdfe5f9</color>
+    <color name="backgroundButtons">#e8f6db</color>
+    <color name="transparent">#00000000</color>
+
+
+    <color name="backgroundNote1">#fffcdae5</color>
+    <color name="backgroundNote2">#ffe1e7e9</color>
+    <color name="backgroundNote3">#fff9f3d3</color>
+
+    <!--BUTTON-->
+    <color name="buttonBkg">#a9adb5</color>
+    <color name="buttonBkgSecond">#616465</color>
+
+    <!--MENU-->
+    <color name="menuUnselect">#a1a4a5</color>
+    <color name="menuSelect">#313435</color>
+</resources>
